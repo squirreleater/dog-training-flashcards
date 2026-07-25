@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Highland Canine — Revision Flashcards</title>
+<meta name="description" content="Revision flashcards for the Highland Canine Master Trainer Program.">
+<style>
+  :root {
+    --bg: #f4f2ee;
+    --surface: #ffffff;
+    --ink: #1b1a17;
+    --ink-soft: #6b6660;
+    --line: #e0dcd5;
+    --accent: #7a5c3e;
+    --accent-soft: #f0e7dc;
+    --shadow: 0 1px 2px rgba(0,0,0,.05), 0 12px 32px -12px rgba(0,0,0,.18);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #16151a;
+      --surface: #212027;
+      --ink: #f0eee9;
+      --ink-soft: #9d978e;
+      --line: #33323b;
+      --accent: #d0a97c;
+      --accent-soft: #2c2831;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 12px 32px -12px rgba(0,0,0,.6);
+    }
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font: 16px/1.6 ui-sans-serif, -apple-system, "Segoe UI", Roboto, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 32px 20px 48px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  header { text-align: center; margin-bottom: 28px; max-width: 640px; }
+  h1 {
+    font-size: clamp(1.35rem, 4vw, 1.75rem);
+    margin: 0 0 6px;
+    letter-spacing: -.02em;
+    font-weight: 650;
+  }
+  .sub { color: var(--ink-soft); font-size: .875rem; margin: 0; }
+
+  .counter {
+    font-variant-numeric: tabular-nums;
+    color: var(--ink-soft);
+    font-size: .8rem;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  /* ---- card ---- */
+  .stage { width: min(640px, 100%); perspective: 1600px; }
+  .card {
+    position: relative;
+    width: 100%;
+    min-height: 340px;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    transition: transform .55s cubic-bezier(.4,.2,.2,1);
+  }
+  .card.flipped { transform: rotateY(180deg); }
+
+  .face {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    box-shadow: var(--shadow);
+    padding: 36px 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    overflow-y: auto;
+  }
+  .face.back { transform: rotateY(180deg); }
+
+  .tag {
+    position: absolute;
+    top: 16px;
+    left: 20px;
+    font-size: .68rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: var(--accent-soft);
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-weight: 600;
+  }
+
+  .q { font-size: clamp(1.05rem, 2.6vw, 1.3rem); font-weight: 600; margin: 0; max-width: 30ch; }
+  .hint { position: absolute; bottom: 16px; font-size: .75rem; color: var(--ink-soft); }
+
+  .a { text-align: left; width: 100%; margin: 0; }
+  .a p { margin: 0 0 12px; }
+  .a p:last-child { margin-bottom: 0; }
+  .a strong { color: var(--accent); }
+  .a ul { margin: 0; padding-left: 20px; }
+  .a li { margin-bottom: 8px; }
+  .a li:last-child { margin-bottom: 0; }
+
+  /* ---- controls ---- */
+  .controls { display: flex; gap: 10px; margin-top: 22px; align-items: center; }
+  button {
+    font: inherit;
+    font-size: .875rem;
+    font-weight: 550;
+    color: var(--ink);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 9px 18px;
+    cursor: pointer;
+    transition: background .15s, border-color .15s, transform .08s;
+  }
+  button:hover { border-color: var(--accent); }
+  button:active { transform: translateY(1px); }
+  button.primary { background: var(--accent); color: var(--surface); border-color: var(--accent); }
+  @media (prefers-color-scheme: dark) {
+    button.primary { color: #16151a; }
+  }
+
+  footer { margin-top: 32px; font-size: .78rem; color: var(--ink-soft); text-align: center; }
+  kbd {
+    font: inherit; font-size: .72rem;
+    background: var(--surface); border: 1px solid var(--line);
+    border-bottom-width: 2px; border-radius: 5px;
+    padding: 1px 6px;
+  }
+  @media (max-width: 480px) {
+    .card { min-height: 300px; }
+    .face { padding: 30px 22px; }
+    footer .keys { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>How Dogs Learn &amp; Puppies</h1>
+  <p class="sub">Highland Canine — Master Trainer Program · revision deck</p>
+</header>
+
+<p class="counter"><span id="pos">1</span> / <span id="total">2</span></p>
+
+<div class="stage">
+  <div class="card" id="card">
+    <div class="face front">
+      <span class="tag" id="tagF"></span>
+      <p class="q" id="question"></p>
+      <span class="hint">click, or press space, to reveal</span>
+    </div>
+    <div class="face back">
+      <span class="tag" id="tagB"></span>
+      <div class="a" id="answer"></div>
+    </div>
+  </div>
+</div>
+
+<div class="controls">
+  <button id="prev" aria-label="Previous card">← Prev</button>
+  <button id="flip" class="primary">Flip</button>
+  <button id="next" aria-label="Next card">Next →</button>
+</div>
+
+<footer>
+  <p class="keys">
+    <kbd>space</kbd> flip · <kbd>←</kbd> <kbd>→</kbd> navigate
+  </p>
+  <p>Compiled from classroom recordings, 20–23 July 2026.</p>
+</footer>
+
+<script>
+/* ------------------------------------------------------------------
+   To add more cards, append objects to this list. That's the only
+   part of the file you need to touch.
+   ------------------------------------------------------------------ */
+const CARDS = [
+  {
+    topic: "Operant conditioning",
+    q: "What is the difference between negative reinforcement and negative punishment — and which is it when you withhold food the dog never had?",
+    a: `<ul>
+          <li><strong>Negative reinforcement</strong> — removing an undesirable stimulus in order to <em>increase</em> a behaviour.</li>
+          <li><strong>Negative punishment</strong> — removing a desirable stimulus the dog <em>already has</em>, in order to <em>decrease</em> a behaviour (e.g. taking food away after the dog grabs it).</li>
+          <li><strong>Withholding food never given is neither.</strong> Nothing has been added or removed. This is properly handled with a <strong>No Reward Mark (NRM)</strong>: a consistent signal — visual, physical or olfactory — telling the dog no reward is coming.</li>
+        </ul>`
+  },
+  {
+    topic: "Training structure",
+    q: "Name the four phases of training, and identify which is most often rushed and which is most often neglected.",
+    a: `<ul>
+          <li><strong>1. Acquisition (Teaching)</strong> — the dog learns a brand-new behaviour. Should take the longest; <strong>rushing this is the most common trainer mistake</strong>.</li>
+          <li><strong>2. Correction</strong> — the behaviour becomes non-optional; consistent consequences make it obligatory.</li>
+          <li><strong>3. Proofing</strong> — the behaviour must hold up in distracting, high-stimulation environments (&ldquo;the three-ring circus&rdquo;).</li>
+          <li><strong>4. Maintenance</strong> — <strong>the most neglected phase.</strong> Includes teaching the owner/handler to sustain the behaviour. The trainer hasn't finished the job until that knowledge transfers to the humans.</li>
+        </ul>`
+  }
+];
+
+const card = document.getElementById('card');
+const qEl = document.getElementById('question');
+const aEl = document.getElementById('answer');
+const tagF = document.getElementById('tagF');
+const tagB = document.getElementById('tagB');
+const posEl = document.getElementById('pos');
+
+let i = 0;
+
+function render() {
+  const c = CARDS[i];
+  card.classList.remove('flipped');
+  // wait for the flip-back to finish before swapping text, so it isn't visible mid-turn
+  setTimeout(() => {
+    qEl.textContent = c.q;
+    aEl.innerHTML = c.a;
+    tagF.textContent = tagB.textContent = c.topic;
+    posEl.textContent = i + 1;
+  }, card.dataset.first ? 0 : 180);
+  card.dataset.first = "";
+}
+
+function flip() { card.classList.toggle('flipped'); }
+function go(step) { i = (i + step + CARDS.length) % CARDS.length; render(); }
+
+document.getElementById('total').textContent = CARDS.length;
+document.getElementById('flip').onclick = flip;
+card.onclick = flip;
+document.getElementById('next').onclick = (e) => { e.stopPropagation(); go(1); };
+document.getElementById('prev').onclick = (e) => { e.stopPropagation(); go(-1); };
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); flip(); }
+  else if (e.key === 'ArrowRight') go(1);
+  else if (e.key === 'ArrowLeft') go(-1);
+});
+
+card.dataset.first = "1";
+render();
+</script>
+
+</body>
+</html>
