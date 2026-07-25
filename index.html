@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Highland Canine — Revision Flashcards</title>
-<meta name="description" content="Revision flashcards for the Highland Canine Master Trainer Program.">
+<meta name="description" content="Multiple-choice revision flashcards for the Highland Canine Master Trainer Program.">
 <style>
   :root {
     --bg: #f4f2ee;
@@ -14,6 +14,10 @@
     --line: #e0dcd5;
     --accent: #7a5c3e;
     --accent-soft: #f0e7dc;
+    --ok: #2f7d52;
+    --ok-soft: #e4f2e9;
+    --no: #b03d3d;
+    --no-soft: #f8e7e5;
     --shadow: 0 1px 2px rgba(0,0,0,.05), 0 12px 32px -12px rgba(0,0,0,.18);
   }
   @media (prefers-color-scheme: dark) {
@@ -25,6 +29,10 @@
       --line: #33323b;
       --accent: #d0a97c;
       --accent-soft: #2c2831;
+      --ok: #6cc48d;
+      --ok-soft: #1e3128;
+      --no: #e08b86;
+      --no-soft: #331f1f;
       --shadow: 0 1px 2px rgba(0,0,0,.3), 0 12px 32px -12px rgba(0,0,0,.6);
     }
   }
@@ -43,111 +51,112 @@
     -webkit-font-smoothing: antialiased;
   }
 
-  header { text-align: center; margin-bottom: 28px; max-width: 640px; }
-  h1 {
-    font-size: clamp(1.35rem, 4vw, 1.75rem);
-    margin: 0 0 6px;
-    letter-spacing: -.02em;
-    font-weight: 650;
-  }
+  header { text-align: center; margin-bottom: 24px; max-width: 640px; }
+  h1 { font-size: clamp(1.35rem, 4vw, 1.75rem); margin: 0 0 6px; letter-spacing: -.02em; font-weight: 650; }
   .sub { color: var(--ink-soft); font-size: .875rem; margin: 0; }
 
-  .counter {
-    font-variant-numeric: tabular-nums;
-    color: var(--ink-soft);
-    font-size: .8rem;
-    letter-spacing: .08em;
-    text-transform: uppercase;
-    margin-bottom: 12px;
+  .meta {
+    display: flex; align-items: center; gap: 14px;
+    font-size: .8rem; letter-spacing: .06em; text-transform: uppercase;
+    color: var(--ink-soft); margin-bottom: 14px; font-variant-numeric: tabular-nums;
   }
+  .score { color: var(--accent); font-weight: 600; }
 
-  /* ---- card ---- */
-  .stage { width: min(640px, 100%); perspective: 1600px; }
   .card {
-    position: relative;
-    width: 100%;
-    min-height: 340px;
-    cursor: pointer;
-    transform-style: preserve-3d;
-    transition: transform .55s cubic-bezier(.4,.2,.2,1);
-  }
-  .card.flipped { transform: rotateY(180deg); }
-
-  .face {
-    position: absolute;
-    inset: 0;
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
+    width: min(640px, 100%);
     background: var(--surface);
     border: 1px solid var(--line);
     border-radius: 18px;
     box-shadow: var(--shadow);
-    padding: 36px 32px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    overflow-y: auto;
+    padding: 30px 30px 26px;
   }
-  .face.back { transform: rotateY(180deg); }
 
   .tag {
-    position: absolute;
-    top: 16px;
-    left: 20px;
-    font-size: .68rem;
-    letter-spacing: .1em;
-    text-transform: uppercase;
-    color: var(--accent);
-    background: var(--accent-soft);
-    padding: 4px 10px;
-    border-radius: 999px;
-    font-weight: 600;
+    display: inline-block;
+    font-size: .68rem; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--accent); background: var(--accent-soft);
+    padding: 4px 10px; border-radius: 999px; font-weight: 600;
+    margin-bottom: 18px;
   }
 
-  .q { font-size: clamp(1.05rem, 2.6vw, 1.3rem); font-weight: 600; margin: 0; max-width: 30ch; }
-  .hint { position: absolute; bottom: 16px; font-size: .75rem; color: var(--ink-soft); }
+  .q { font-size: clamp(1rem, 2.4vw, 1.15rem); font-weight: 600; margin: 0 0 22px; line-height: 1.45; }
 
-  .a { text-align: left; width: 100%; margin: 0; }
-  .a p { margin: 0 0 12px; }
-  .a p:last-child { margin-bottom: 0; }
-  .a strong { color: var(--accent); }
-  .a ul { margin: 0; padding-left: 20px; }
-  .a li { margin-bottom: 8px; }
-  .a li:last-child { margin-bottom: 0; }
+  /* ---- options ---- */
+  .opts { display: flex; flex-direction: column; gap: 9px; }
+  .opt {
+    display: flex; align-items: flex-start; gap: 12px;
+    width: 100%; text-align: left;
+    font: inherit; font-size: .925rem; line-height: 1.5;
+    color: var(--ink); background: var(--surface);
+    border: 1px solid var(--line); border-radius: 11px;
+    padding: 13px 15px; cursor: pointer;
+    transition: border-color .15s, background .15s, transform .08s;
+  }
+  .opt:hover:not(:disabled) { border-color: var(--accent); background: var(--accent-soft); }
+  .opt:active:not(:disabled) { transform: translateY(1px); }
+  .opt:disabled { cursor: default; }
+
+  .letter {
+    flex: 0 0 24px; height: 24px;
+    display: grid; place-items: center;
+    border-radius: 6px;
+    background: var(--accent-soft); color: var(--accent);
+    font-size: .78rem; font-weight: 700;
+    margin-top: 1px;
+  }
+
+  .opt.correct { border-color: var(--ok); background: var(--ok-soft); }
+  .opt.correct .letter { background: var(--ok); color: var(--surface); }
+  .opt.wrong { border-color: var(--no); background: var(--no-soft); }
+  .opt.wrong .letter { background: var(--no); color: var(--surface); }
+  .opt.muted { opacity: .5; }
+  @media (prefers-color-scheme: dark) {
+    .opt.correct .letter, .opt.wrong .letter { color: #16151a; }
+  }
+
+  .mark { margin-left: auto; font-weight: 700; font-size: .95rem; padding-left: 8px; }
+  .opt.correct .mark { color: var(--ok); }
+  .opt.wrong .mark { color: var(--no); }
+
+  /* ---- explanation ---- */
+  .explain {
+    margin-top: 20px; padding-top: 18px;
+    border-top: 1px solid var(--line);
+    font-size: .9rem;
+    display: none;
+  }
+  .explain.show { display: block; animation: rise .3s ease both; }
+  @keyframes rise { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+  .verdict { font-weight: 650; margin: 0 0 10px; }
+  .verdict.yes { color: var(--ok); }
+  .verdict.no { color: var(--no); }
+  .explain ul { margin: 0; padding-left: 20px; }
+  .explain li { margin-bottom: 8px; }
+  .explain li:last-child { margin-bottom: 0; }
+  .explain strong { color: var(--accent); }
 
   /* ---- controls ---- */
-  .controls { display: flex; gap: 10px; margin-top: 22px; align-items: center; }
-  button {
-    font: inherit;
-    font-size: .875rem;
-    font-weight: 550;
-    color: var(--ink);
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: 10px;
-    padding: 9px 18px;
-    cursor: pointer;
-    transition: background .15s, border-color .15s, transform .08s;
+  .controls { display: flex; gap: 10px; margin-top: 22px; }
+  button.nav {
+    font: inherit; font-size: .875rem; font-weight: 550;
+    color: var(--ink); background: var(--surface);
+    border: 1px solid var(--line); border-radius: 10px;
+    padding: 9px 18px; cursor: pointer;
+    transition: border-color .15s, transform .08s;
   }
-  button:hover { border-color: var(--accent); }
-  button:active { transform: translateY(1px); }
-  button.primary { background: var(--accent); color: var(--surface); border-color: var(--accent); }
-  @media (prefers-color-scheme: dark) {
-    button.primary { color: #16151a; }
-  }
+  button.nav:hover { border-color: var(--accent); }
+  button.nav:active { transform: translateY(1px); }
+  button.nav.primary { background: var(--accent); color: var(--surface); border-color: var(--accent); }
+  @media (prefers-color-scheme: dark) { button.nav.primary { color: #16151a; } }
 
-  footer { margin-top: 32px; font-size: .78rem; color: var(--ink-soft); text-align: center; }
+  footer { margin-top: 30px; font-size: .78rem; color: var(--ink-soft); text-align: center; }
   kbd {
     font: inherit; font-size: .72rem;
     background: var(--surface); border: 1px solid var(--line);
-    border-bottom-width: 2px; border-radius: 5px;
-    padding: 1px 6px;
+    border-bottom-width: 2px; border-radius: 5px; padding: 1px 6px;
   }
   @media (max-width: 480px) {
-    .card { min-height: 300px; }
-    .face { padding: 30px 22px; }
+    .card { padding: 24px 20px 22px; }
     footer .keys { display: none; }
   }
 </style>
@@ -159,100 +168,153 @@
   <p class="sub">Highland Canine — Master Trainer Program · revision deck</p>
 </header>
 
-<p class="counter"><span id="pos">1</span> / <span id="total">2</span></p>
+<div class="meta">
+  <span><span id="pos">1</span> / <span id="total">2</span></span>
+  <span class="score" id="score">0 correct</span>
+</div>
 
-<div class="stage">
-  <div class="card" id="card">
-    <div class="face front">
-      <span class="tag" id="tagF"></span>
-      <p class="q" id="question"></p>
-      <span class="hint">click, or press space, to reveal</span>
-    </div>
-    <div class="face back">
-      <span class="tag" id="tagB"></span>
-      <div class="a" id="answer"></div>
-    </div>
+<div class="card">
+  <span class="tag" id="tag"></span>
+  <p class="q" id="question"></p>
+  <div class="opts" id="opts"></div>
+  <div class="explain" id="explain">
+    <p class="verdict" id="verdict"></p>
+    <div id="explainBody"></div>
   </div>
 </div>
 
 <div class="controls">
-  <button id="prev" aria-label="Previous card">← Prev</button>
-  <button id="flip" class="primary">Flip</button>
-  <button id="next" aria-label="Next card">Next →</button>
+  <button class="nav" id="prev">← Prev</button>
+  <button class="nav" id="retry">Retry</button>
+  <button class="nav primary" id="next">Next →</button>
 </div>
 
 <footer>
-  <p class="keys">
-    <kbd>space</kbd> flip · <kbd>←</kbd> <kbd>→</kbd> navigate
-  </p>
+  <p class="keys"><kbd>A</kbd>–<kbd>D</kbd> answer · <kbd>←</kbd> <kbd>→</kbd> navigate</p>
   <p>Compiled from classroom recordings, 20–23 July 2026.</p>
 </footer>
 
 <script>
 /* ------------------------------------------------------------------
-   To add more cards, append objects to this list. That's the only
-   part of the file you need to touch.
+   To add more questions, append objects to this list. Mark the right
+   answer with `correct: true`. That's the only part you need to touch.
    ------------------------------------------------------------------ */
 const CARDS = [
   {
     topic: "Operant conditioning",
-    q: "What is the difference between negative reinforcement and negative punishment — and which is it when you withhold food the dog never had?",
-    a: `<ul>
-          <li><strong>Negative reinforcement</strong> — removing an undesirable stimulus in order to <em>increase</em> a behaviour.</li>
-          <li><strong>Negative punishment</strong> — removing a desirable stimulus the dog <em>already has</em>, in order to <em>decrease</em> a behaviour (e.g. taking food away after the dog grabs it).</li>
-          <li><strong>Withholding food never given is neither.</strong> Nothing has been added or removed. This is properly handled with a <strong>No Reward Mark (NRM)</strong>: a consistent signal — visual, physical or olfactory — telling the dog no reward is coming.</li>
-        </ul>`
+    q: "A dog is offered nothing while you hold food it has never had, and you simply do not give it. Which quadrant does this fall into?",
+    options: [
+      { t: "Negative reinforcement — you are removing the chance of a reward, which increases the behaviour." },
+      { t: "Negative punishment — a desirable stimulus (the food) is being taken away from the dog." },
+      { t: "Neither — nothing has been added or removed. This is properly handled with a No Reward Mark (NRM).", correct: true },
+      { t: "Positive punishment — the absence of expected food acts as an aversive stimulus." }
+    ],
+    explain: `<ul>
+        <li><strong>Negative reinforcement</strong> — removing an undesirable stimulus in order to <em>increase</em> a behaviour.</li>
+        <li><strong>Negative punishment</strong> — removing a desirable stimulus the dog <em>already has</em>, in order to <em>decrease</em> a behaviour (e.g. taking food away after the dog grabs it).</li>
+        <li>Food the dog never had <strong>cannot be removed</strong>, so neither applies. Use a <strong>No Reward Mark (NRM)</strong>: a consistent signal — visual, physical or olfactory — telling the dog no reward is coming.</li>
+      </ul>`
   },
   {
     topic: "Training structure",
-    q: "Name the four phases of training, and identify which is most often rushed and which is most often neglected.",
-    a: `<ul>
-          <li><strong>1. Acquisition (Teaching)</strong> — the dog learns a brand-new behaviour. Should take the longest; <strong>rushing this is the most common trainer mistake</strong>.</li>
-          <li><strong>2. Correction</strong> — the behaviour becomes non-optional; consistent consequences make it obligatory.</li>
-          <li><strong>3. Proofing</strong> — the behaviour must hold up in distracting, high-stimulation environments (&ldquo;the three-ring circus&rdquo;).</li>
-          <li><strong>4. Maintenance</strong> — <strong>the most neglected phase.</strong> Includes teaching the owner/handler to sustain the behaviour. The trainer hasn't finished the job until that knowledge transfers to the humans.</li>
-        </ul>`
+    q: "Which option correctly lists the four phases of training in order, with the right phase identified as most-rushed and most-neglected?",
+    options: [
+      { t: "Acquisition → Correction → Proofing → Maintenance. Acquisition is most often rushed; Maintenance is most often neglected.", correct: true },
+      { t: "Acquisition → Proofing → Correction → Maintenance. Proofing is most often rushed; Correction is most often neglected." },
+      { t: "Teaching → Shaping → Chaining → Proofing. Shaping is most often rushed; Chaining is most often neglected." },
+      { t: "Acquisition → Correction → Proofing → Maintenance. Correction is most often rushed; Proofing is most often neglected." }
+    ],
+    explain: `<ul>
+        <li><strong>1. Acquisition (Teaching)</strong> — the dog learns a brand-new behaviour. Should take the longest; <strong>rushing it is the most common trainer mistake</strong>.</li>
+        <li><strong>2. Correction</strong> — the behaviour becomes non-optional; consistent consequences make it obligatory.</li>
+        <li><strong>3. Proofing</strong> — the behaviour must hold up in distracting, high-stimulation environments (&ldquo;the three-ring circus&rdquo;).</li>
+        <li><strong>4. Maintenance</strong> — <strong>the most neglected phase.</strong> Includes teaching the owner/handler to sustain the behaviour. The trainer hasn't finished the job until that knowledge transfers to the humans.</li>
+      </ul>`
   }
 ];
 
-const card = document.getElementById('card');
-const qEl = document.getElementById('question');
-const aEl = document.getElementById('answer');
-const tagF = document.getElementById('tagF');
-const tagB = document.getElementById('tagB');
-const posEl = document.getElementById('pos');
-
+const LETTERS = ["A", "B", "C", "D", "E", "F"];
+const $ = id => document.getElementById(id);
+const answered = new Array(CARDS.length).fill(null); // stores chosen index
 let i = 0;
 
 function render() {
   const c = CARDS[i];
-  card.classList.remove('flipped');
-  // wait for the flip-back to finish before swapping text, so it isn't visible mid-turn
-  setTimeout(() => {
-    qEl.textContent = c.q;
-    aEl.innerHTML = c.a;
-    tagF.textContent = tagB.textContent = c.topic;
-    posEl.textContent = i + 1;
-  }, card.dataset.first ? 0 : 180);
-  card.dataset.first = "";
+  $('tag').textContent = c.topic;
+  $('question').textContent = c.q;
+  $('pos').textContent = i + 1;
+
+  const opts = $('opts');
+  opts.innerHTML = '';
+  c.options.forEach((o, n) => {
+    const b = document.createElement('button');
+    b.className = 'opt';
+    b.innerHTML = `<span class="letter">${LETTERS[n]}</span><span>${o.t}</span>`;
+    b.onclick = () => choose(n);
+    opts.appendChild(b);
+  });
+
+  if (answered[i] !== null) reveal(answered[i]);
+  else {
+    $('explain').classList.remove('show');
+  }
+  updateScore();
 }
 
-function flip() { card.classList.toggle('flipped'); }
+function choose(n) {
+  if (answered[i] !== null) return;   // already answered
+  answered[i] = n;
+  reveal(n);
+  updateScore();
+}
+
+function reveal(chosen) {
+  const c = CARDS[i];
+  const buttons = [...$('opts').children];
+  buttons.forEach((b, n) => {
+    b.disabled = true;
+    const isCorrect = !!c.options[n].correct;
+    if (isCorrect) {
+      b.classList.add('correct');
+      b.insertAdjacentHTML('beforeend', '<span class="mark">✓</span>');
+    } else if (n === chosen) {
+      b.classList.add('wrong');
+      b.insertAdjacentHTML('beforeend', '<span class="mark">✕</span>');
+    } else {
+      b.classList.add('muted');
+    }
+  });
+
+  const gotIt = !!c.options[chosen].correct;
+  const v = $('verdict');
+  v.textContent = gotIt ? "Correct" : "Not quite";
+  v.className = 'verdict ' + (gotIt ? 'yes' : 'no');
+  $('explainBody').innerHTML = c.explain;
+  $('explain').classList.add('show');
+}
+
+function updateScore() {
+  const n = answered.reduce((acc, a, idx) =>
+    acc + (a !== null && CARDS[idx].options[a].correct ? 1 : 0), 0);
+  const done = answered.filter(a => a !== null).length;
+  $('score').textContent = done ? `${n} / ${done} correct` : 'not answered yet';
+}
+
 function go(step) { i = (i + step + CARDS.length) % CARDS.length; render(); }
 
-document.getElementById('total').textContent = CARDS.length;
-document.getElementById('flip').onclick = flip;
-card.onclick = flip;
-document.getElementById('next').onclick = (e) => { e.stopPropagation(); go(1); };
-document.getElementById('prev').onclick = (e) => { e.stopPropagation(); go(-1); };
+$('total').textContent = CARDS.length;
+$('next').onclick = () => go(1);
+$('prev').onclick = () => go(-1);
+$('retry').onclick = () => { answered[i] = null; render(); };
 
 document.addEventListener('keydown', (e) => {
-  if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); flip(); }
+  const k = e.key.toUpperCase();
+  const n = LETTERS.indexOf(k);
+  if (n > -1 && n < CARDS[i].options.length) { choose(n); }
   else if (e.key === 'ArrowRight') go(1);
   else if (e.key === 'ArrowLeft') go(-1);
 });
 
-card.dataset.first = "1";
 render();
 </script>
 
