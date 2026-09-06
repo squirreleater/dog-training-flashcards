@@ -38,16 +38,32 @@ Oxblood is used sparingly on purpose — buttons, hovers, hairlines only.
 
 ## Photography
 
-Every photo slot is a dark placeholder plate with a caption saying what belongs
-there (e.g. *Photo ▸ Vesi — black-background studio portrait*). Swap each one for
-an `<img>` when the real photography exists. The shot list, in rough priority:
+The six dog photographs are **cropped out of `Web mock up.png`** and placed where
+the mockup had them:
 
-1. Hero — black working-line GSD in motion, full width
-2. Sport / Working / Companion — one card image each
-3. Vesi — black-background studio portrait
-4. Scott with a dog — landscape or back view, for About
-5. Working dog on an unstable surface / at height
-6. Vesi progress log — one per development stage
+| File | Used on |
+|---|---|
+| `hero-dog` | home hero (middle column) |
+| `card-sport` | home card, Training › Sport |
+| `card-working` | home card, Training › Working, Working Dogs › Detection |
+| `card-companion` | home card, Training › Companion |
+| `vesi-portrait` | home Vesi block, The Dogs |
+| `about-scott` | home About block, About page, Working Dogs › Handler |
+
+Each is exported as WebP with a JPEG fallback, via `<picture>`.
+
+**These are low resolution.** The mockup is 1024×1536, so the crops range from
+312×168 to 462×242 and are being displayed at or above their native size — they
+look soft on a high-DPI screen, and the hero especially. They are fine for
+judging the design; they are not fine for launch. Replace them with the original
+full-resolution files, or with real photographs of Scott's own dogs, at roughly
+2× the displayed size.
+
+Slots with no matching source image still show a labelled placeholder plate:
+
+- Vesi's progress log — three dated shots (week 9, month 4, month 6)
+- Working Dogs — environmental work at height / on grating, dog on an unstable surface
+- About — the Highland Canine and IACP logo slots
 
 ## Still to confirm
 
@@ -73,7 +89,7 @@ and usage has been checked.
 
 - [ ] Remove the preview strip from all 11 pages
 - [ ] Remove the `noindex` meta block from all 11 pages
-- [ ] Real photography in place of the plates
+- [ ] Full-resolution photography in place of the low-res mockup crops
 - [ ] Real contact details and social links
 - [ ] Connect the contact form + add a privacy notice
 - [ ] Add Open Graph / Twitter card tags and a real share image
