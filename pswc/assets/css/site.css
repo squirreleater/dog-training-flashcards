@@ -168,23 +168,29 @@ h1,h2,h3,h4,.display{
   background-image:radial-gradient(rgba(255,255,255,.035) 1px, transparent 1px);
   background-size:3px 3px;
 }
+/* full-bleed hero photograph, as in the mockup */
+.hero.has-photo{
+  background-image:url("../img/hero-dog.jpg");
+  background-size:cover;
+  background-position:center right;
+  background-repeat:no-repeat;
+}
+.hero.has-photo .hero-scrim{
+  position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:
+    linear-gradient(90deg,
+      rgba(0,0,0,.97) 0%, rgba(0,0,0,.90) 24%, rgba(0,0,0,.62) 40%,
+      rgba(0,0,0,.20) 56%, rgba(0,0,0,.30) 74%, rgba(0,0,0,.72) 92%, rgba(0,0,0,.88) 100%),
+    linear-gradient(180deg, rgba(0,0,0,.62) 0%, rgba(0,0,0,0) 26%, rgba(0,0,0,0) 62%, rgba(0,0,0,.86) 100%);
+}
 .hero-inner{
   position:relative;z-index:2;
   max-width:1320px;margin:0 auto;padding:86px 26px 78px;
-  display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.72fr) minmax(0,.5fr);
-  gap:44px;align-items:center;
+  display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);
+  gap:56px;align-items:center;
+  min-height:min(78vh,720px);
 }
-
-/* ---------- hero photograph ---------------------------------------------- */
-.hero-photo{position:relative;align-self:stretch;display:flex;align-items:center}
-.hero-photo picture{display:block;width:100%}
-.hero-photo img{
-  width:100%;height:auto;display:block;
-  filter:saturate(.9) contrast(1.04);
-  -webkit-mask-image:radial-gradient(120% 108% at 50% 50%, #000 52%, rgba(0,0,0,0) 97%);
-          mask-image:radial-gradient(120% 108% at 50% 50%, #000 52%, rgba(0,0,0,0) 97%);
-}
-.hero-logo{width:min(360px,86%);margin:0 0 30px;filter:drop-shadow(0 22px 44px rgba(0,0,0,.85))}
+.hero-logo{width:min(420px,84%);margin:0 0 32px;filter:drop-shadow(0 22px 44px rgba(0,0,0,.85))}
 .hero h1{
   font-size:clamp(30px,3.6vw,46px);letter-spacing:.09em;color:#ddd7cf;
   margin-bottom:14px;
@@ -348,6 +354,16 @@ section.tight{padding:64px 0}
   color:var(--ox-bright);border:1px solid rgba(143,21,29,.5);padding:5px 10px;
 }
 .stage .status.done{color:var(--stone-dim);border-color:var(--line)}
+
+/* ---------- credential logo plate --------------------------------------- */
+.cred-logo{
+  margin:-32px -34px 26px;
+  background:#f2efeb;
+  border-bottom:1px solid var(--line-soft);
+  display:flex;align-items:center;justify-content:center;
+  padding:26px 30px;min-height:132px;
+}
+.cred-logo img{max-height:78px;width:auto;object-fit:contain}
 
 /* ---------- feature list with rules ------------------------------------- */
 .rules{list-style:none;margin:0;padding:0}
@@ -514,12 +530,17 @@ section.tight{padding:64px 0}
   .nav-links a::after{display:none}
   .nav-cta{margin-top:16px;text-align:center;justify-content:center;border-bottom:0!important}
   .nav-toggle{display:block}
-  .hero-inner{grid-template-columns:1fr;gap:36px;padding:64px 26px 60px}
-  .hero-photo{max-width:460px}
-  .hero-photo img{
-    -webkit-mask-image:radial-gradient(125% 112% at 50% 50%, #000 58%, rgba(0,0,0,0) 99%);
-            mask-image:radial-gradient(125% 112% at 50% 50%, #000 58%, rgba(0,0,0,0) 99%);
+  .hero-inner{grid-template-columns:1fr;gap:36px;padding:64px 26px 60px;min-height:0}
+  .hero.has-photo{
+    background-image:url("../img/hero-dog-mobile.jpg");
+    background-position:center top;
   }
+  .hero.has-photo .hero-scrim{
+    background:
+      linear-gradient(180deg, rgba(0,0,0,.62) 0%, rgba(0,0,0,.34) 22%,
+        rgba(0,0,0,.72) 58%, rgba(0,0,0,.94) 82%, #000 100%);
+  }
+  .cred-logo{margin:-28px -24px 22px;min-height:112px;padding:22px}
   .hero-side{border-left:0;border-top:1px solid var(--line);padding-left:0;padding-top:32px}
   .cards{grid-template-columns:1fr;gap:20px}
   .split,.split.wide-left{grid-template-columns:1fr;gap:36px}
