@@ -1,0 +1,80 @@
+# PSWC — design preview
+
+**Peets Sport & Working Canines.** A private, non-live design preview built from
+Scott's logo, mockup and brief.
+
+## Status
+
+- **Not live.** Nothing is announced, linked or submitted anywhere.
+- **Not indexed.** Every page carries `noindex, nofollow, noarchive, nosnippet,
+  noimageindex` for general crawlers plus named rules for Google, Bing, Yahoo,
+  DuckDuckGo, Baidu, Yandex, GPTBot, CCBot and ClaudeBot. There are deliberately
+  no Open Graph or Twitter card tags, so pasting the link into a chat or an email
+  produces no preview card.
+- A thin **"private design preview"** strip sits at the top of every page so it
+  can't be mistaken for a live site. Delete that one `<div>` to remove it.
+
+The URL is unguessable-ish but technically public — treat it as "unlisted",
+not "secret".
+
+## Viewing it locally
+
+No build step, no server. Download the folder and double-click `index.html`.
+All paths are relative, so it works straight from `file://`.
+
+## Editing it
+
+Plain HTML + one stylesheet. Nothing to compile.
+
+| What | Where |
+|---|---|
+| Colours, type, spacing | `assets/css/site.css` (all tokens are at the top under `:root`) |
+| Page copy | the `.html` file for that page |
+| Nav and footer | repeated in each `.html` file — change all of them together |
+| Logo | `assets/img/pswc-logo.*`, `pswc-mark.png`, `favicon.png` |
+
+Palette is sampled from the seal: black `#000`, stone `#c9c3bb`, oxblood `#8f151d`.
+Oxblood is used sparingly on purpose — buttons, hovers, hairlines only.
+
+## Photography
+
+Every photo slot is a dark placeholder plate with a caption saying what belongs
+there (e.g. *Photo ▸ Vesi — black-background studio portrait*). Swap each one for
+an `<img>` when the real photography exists. The shot list, in rough priority:
+
+1. Hero — black working-line GSD in motion, full width
+2. Sport / Working / Companion — one card image each
+3. Vesi — black-background studio portrait
+4. Scott with a dog — landscape or back view, for About
+5. Working dog on an unstable surface / at height
+6. Vesi progress log — one per development stage
+
+## Still to confirm
+
+Everything marked with a dashed underline in the page is a placeholder:
+email, phone, location, travel radius, social handles, programme formats and
+pricing, and the stage date ranges on Vesi's record.
+
+The contact form is **not connected** — it pops an alert. It needs a form
+handler and a privacy notice before launch.
+
+## Credentials
+
+The About page states the Highland Canine Master Trainer Program (6 Jul –
+18 Dec 2026, under Jason Purgason) as **in progress**, and IACP membership as
+**on graduation**. Both are written as pending rather than held — worth keeping
+that way until December.
+
+Official Highland Canine and IACP marks are **not** included. Both have usage
+terms for members; the logo slots are sized and ready once membership is active
+and usage has been checked.
+
+## Before this goes live
+
+- [ ] Remove the preview strip from all 11 pages
+- [ ] Remove the `noindex` meta block from all 11 pages
+- [ ] Real photography in place of the plates
+- [ ] Real contact details and social links
+- [ ] Connect the contact form + add a privacy notice
+- [ ] Add Open Graph / Twitter card tags and a real share image
+- [ ] Point `pswk9.com` at it, add a root `robots.txt` and a sitemap

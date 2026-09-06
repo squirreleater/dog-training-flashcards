@@ -1,0 +1,7 @@
+# PSWC private design preview — not for indexing.
+# NOTE: on GitHub Pages a robots.txt inside a project subfolder is NOT read by
+# crawlers (they only read the one at the domain root). The real protection is
+# the noindex/nofollow meta tags on every page. This file is here so the intent
+# travels with the folder when the site moves to its own domain.
+User-agent: *
+Disallow: /
