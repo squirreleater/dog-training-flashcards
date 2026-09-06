@@ -168,28 +168,23 @@ h1,h2,h3,h4,.display{
   background-image:radial-gradient(rgba(255,255,255,.035) 1px, transparent 1px);
   background-size:3px 3px;
 }
-/* the mockup's hero photograph, anchored right of centre behind the type */
-.hero.has-photo::before{
-  content:"";position:absolute;inset:0;z-index:0;
-  background:url("../img/hero-dog.jpg") no-repeat;
-  background-position:right 20% center;
-  background-size:auto 118%;
-}
-.hero.has-photo .hero-scrim{
-  position:absolute;inset:0;z-index:1;pointer-events:none;
-  background:
-    linear-gradient(90deg,
-      #000 0%, rgba(0,0,0,.94) 22%, rgba(0,0,0,.55) 40%,
-      rgba(0,0,0,.10) 55%, rgba(0,0,0,.55) 74%, rgba(0,0,0,.93) 90%, #000 100%),
-    linear-gradient(180deg, rgba(0,0,0,.55) 0%, rgba(0,0,0,0) 30%, rgba(0,0,0,.75) 100%);
-}
 .hero-inner{
   position:relative;z-index:2;
   max-width:1320px;margin:0 auto;padding:86px 26px 78px;
-  display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);
-  gap:56px;align-items:center;
+  display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.72fr) minmax(0,.5fr);
+  gap:44px;align-items:center;
 }
-.hero-logo{width:min(430px,80%);margin:0 0 34px;filter:drop-shadow(0 22px 44px rgba(0,0,0,.85))}
+
+/* ---------- hero photograph ---------------------------------------------- */
+.hero-photo{position:relative;align-self:stretch;display:flex;align-items:center}
+.hero-photo picture{display:block;width:100%}
+.hero-photo img{
+  width:100%;height:auto;display:block;
+  filter:saturate(.9) contrast(1.04);
+  -webkit-mask-image:radial-gradient(120% 108% at 50% 50%, #000 52%, rgba(0,0,0,0) 97%);
+          mask-image:radial-gradient(120% 108% at 50% 50%, #000 52%, rgba(0,0,0,0) 97%);
+}
+.hero-logo{width:min(360px,86%);margin:0 0 30px;filter:drop-shadow(0 22px 44px rgba(0,0,0,.85))}
 .hero h1{
   font-size:clamp(30px,3.6vw,46px);letter-spacing:.09em;color:#ddd7cf;
   margin-bottom:14px;
@@ -519,12 +514,11 @@ section.tight{padding:64px 0}
   .nav-links a::after{display:none}
   .nav-cta{margin-top:16px;text-align:center;justify-content:center;border-bottom:0!important}
   .nav-toggle{display:block}
-  .hero-inner{grid-template-columns:1fr;gap:40px;padding:64px 26px 60px}
-  .hero.has-photo::before{background-position:right 34% top;background-size:auto 82%}
-  .hero.has-photo .hero-scrim{
-    background:
-      linear-gradient(180deg, rgba(0,0,0,.5) 0%, rgba(0,0,0,.72) 45%, #000 88%),
-      linear-gradient(90deg, rgba(0,0,0,.7) 0%, rgba(0,0,0,.25) 50%, rgba(0,0,0,.7) 100%);
+  .hero-inner{grid-template-columns:1fr;gap:36px;padding:64px 26px 60px}
+  .hero-photo{max-width:460px}
+  .hero-photo img{
+    -webkit-mask-image:radial-gradient(125% 112% at 50% 50%, #000 58%, rgba(0,0,0,0) 99%);
+            mask-image:radial-gradient(125% 112% at 50% 50%, #000 58%, rgba(0,0,0,0) 99%);
   }
   .hero-side{border-left:0;border-top:1px solid var(--line);padding-left:0;padding-top:32px}
   .cards{grid-template-columns:1fr;gap:20px}
