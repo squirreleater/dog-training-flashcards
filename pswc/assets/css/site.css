@@ -164,9 +164,24 @@ h1,h2,h3,h4,.display{
     linear-gradient(180deg,#0b0b0b 0%, #000 100%);
 }
 .hero::after{ /* fine grain so the flat black doesn't band */
-  content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;
+  content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;z-index:1;
   background-image:radial-gradient(rgba(255,255,255,.035) 1px, transparent 1px);
   background-size:3px 3px;
+}
+/* the mockup's hero photograph, anchored right of centre behind the type */
+.hero.has-photo::before{
+  content:"";position:absolute;inset:0;z-index:0;
+  background:url("../img/hero-dog.jpg") no-repeat;
+  background-position:right 20% center;
+  background-size:auto 118%;
+}
+.hero.has-photo .hero-scrim{
+  position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:
+    linear-gradient(90deg,
+      #000 0%, rgba(0,0,0,.94) 22%, rgba(0,0,0,.55) 40%,
+      rgba(0,0,0,.10) 55%, rgba(0,0,0,.55) 74%, rgba(0,0,0,.93) 90%, #000 100%),
+    linear-gradient(180deg, rgba(0,0,0,.55) 0%, rgba(0,0,0,0) 30%, rgba(0,0,0,.75) 100%);
 }
 .hero-inner{
   position:relative;z-index:2;
@@ -240,11 +255,28 @@ section.tight{padding:64px 0}
   position:relative;z-index:2;padding:20px;
   font-size:9.5px;letter-spacing:.24em;text-transform:uppercase;color:#8a827a;
 }
-.plate.ratio-4x3{aspect-ratio:4/3}
-.plate.ratio-3x2{aspect-ratio:3/2}
-.plate.ratio-1x1{aspect-ratio:1/1}
-.plate.ratio-tall{aspect-ratio:3/4}
-.plate.ratio-wide{aspect-ratio:16/7}
+.ratio-4x3{aspect-ratio:4/3}
+.ratio-3x2{aspect-ratio:3/2}
+.ratio-1x1{aspect-ratio:1/1}
+.ratio-tall{aspect-ratio:3/4}
+.ratio-wide{aspect-ratio:16/7}
+
+/* ---------- shot: a real photograph in an aspect-locked frame ----------- */
+.shot{
+  position:relative;overflow:hidden;
+  border:1px solid var(--line);background:#0b0b0b;
+}
+.shot picture{display:block;width:100%;height:100%}
+.shot img{
+  width:100%;height:100%;object-fit:cover;display:block;
+  filter:saturate(.9) contrast(1.03);
+}
+.shot::after{ /* keeps the photos sitting in the same tonal world as the page */
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(180deg,rgba(0,0,0,.12) 0%,rgba(0,0,0,0) 38%,rgba(0,0,0,.42) 100%);
+}
+.card .shot{border:0;border-bottom:1px solid var(--line-soft)}
+.prog .shot{border:0;border-right:1px solid var(--line-soft)}
 
 /* ---------- three cards -------------------------------------------------- */
 .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
@@ -329,6 +361,9 @@ section.tight{padding:64px 0}
   font-size:11.5px;letter-spacing:.19em;text-transform:uppercase;color:var(--stone-mid);
 }
 .rules li:first-child{border-top:1px solid var(--line-soft)}
+.rules-cols{columns:2;column-gap:44px;margin-top:14px}
+.rules-cols li{break-inside:avoid}
+.rules-cols li:first-child{border-top:0}
 
 /* ---------- programme blocks -------------------------------------------- */
 .prog{
@@ -485,6 +520,12 @@ section.tight{padding:64px 0}
   .nav-cta{margin-top:16px;text-align:center;justify-content:center;border-bottom:0!important}
   .nav-toggle{display:block}
   .hero-inner{grid-template-columns:1fr;gap:40px;padding:64px 26px 60px}
+  .hero.has-photo::before{background-position:right 34% top;background-size:auto 82%}
+  .hero.has-photo .hero-scrim{
+    background:
+      linear-gradient(180deg, rgba(0,0,0,.5) 0%, rgba(0,0,0,.72) 45%, #000 88%),
+      linear-gradient(90deg, rgba(0,0,0,.7) 0%, rgba(0,0,0,.25) 50%, rgba(0,0,0,.7) 100%);
+  }
   .hero-side{border-left:0;border-top:1px solid var(--line);padding-left:0;padding-top:32px}
   .cards{grid-template-columns:1fr;gap:20px}
   .split,.split.wide-left{grid-template-columns:1fr;gap:36px}
@@ -493,6 +534,7 @@ section.tight{padding:64px 0}
   .posts{grid-template-columns:1fr}
   .stage{grid-template-columns:1fr;gap:14px}
   .footer-cols{grid-template-columns:repeat(2,1fr)}
+  .rules-cols{columns:1}
 }
 @media (max-width:560px){
   section{padding:60px 0}
