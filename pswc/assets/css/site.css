@@ -189,7 +189,8 @@ h1,h2,h3,h4,.display{
 .hero-side{border-left:1px solid var(--line);padding-left:40px}
 .hero-side .pillars{
   font-family:var(--f-display);font-size:clamp(20px,2.1vw,27px);
-  letter-spacing:.12em;color:var(--stone);line-height:1.6;
+  letter-spacing:.14em;color:var(--stone);line-height:1.6;
+  text-transform:uppercase;
 }
 .hero-side .pillars span{display:block}
 .hero-side .kicker{
@@ -221,23 +222,23 @@ section.tight{padding:64px 0}
 .plate{
   position:relative;
   background:
-    radial-gradient(120% 90% at 30% 20%, #1d1c1b 0%, #0b0b0b 68%),
-    linear-gradient(160deg,#151413 0%,#070707 100%);
-  border:1px solid var(--line);
+    radial-gradient(120% 95% at 32% 18%, #34312e 0%, #201e1c 45%, #131211 78%),
+    linear-gradient(160deg,#26241f 0%,#0d0d0c 100%);
+  border:1px solid #2e2b28;
   display:flex;align-items:flex-end;justify-content:flex-start;
   overflow:hidden;
 }
-.plate::before{
+.plate::before{ /* faint diagonal hatch so an empty slot reads as deliberate */
   content:"";position:absolute;inset:0;
-  background-image:linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px);
-  background-size:100% 4px;opacity:.6;
+  background-image:repeating-linear-gradient(
+    135deg, rgba(255,255,255,.028) 0 1px, transparent 1px 9px);
 }
 .plate::after{
-  content:"";position:absolute;left:22px;top:22px;width:26px;height:1px;background:var(--ox);
+  content:"";position:absolute;left:20px;top:20px;width:24px;height:1px;background:var(--ox-bright);
 }
 .plate .slot{
-  position:relative;z-index:2;padding:22px;
-  font-size:9.5px;letter-spacing:.24em;text-transform:uppercase;color:#4e4842;
+  position:relative;z-index:2;padding:20px;
+  font-size:9.5px;letter-spacing:.24em;text-transform:uppercase;color:#8a827a;
 }
 .plate.ratio-4x3{aspect-ratio:4/3}
 .plate.ratio-3x2{aspect-ratio:3/2}
