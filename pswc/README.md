@@ -43,7 +43,7 @@ the mockup had them:
 
 | File | Used on |
 |---|---|
-| `hero-dog` | home hero (middle column) |
+| `hero-dog` / `hero-dog-mobile` | home hero (full-bleed background) |
 | `card-sport` | home card, Training › Sport |
 | `card-working` | home card, Training › Working, Working Dogs › Detection |
 | `card-companion` | home card, Training › Companion |
@@ -52,18 +52,40 @@ the mockup had them:
 
 Each is exported as WebP with a JPEG fallback, via `<picture>`.
 
-**These are low resolution.** The mockup is 1024×1536, so the crops range from
-312×168 to 462×242 and are being displayed at or above their native size — they
-look soft on a high-DPI screen, and the hero especially. They are fine for
-judging the design; they are not fine for launch. Replace them with the original
-full-resolution files, or with real photographs of Scott's own dogs, at roughly
-2× the displayed size.
+### The hero is a composite
+
+The mockup's hero band has the logo and headline baked into it, so the only
+text-free strip is the 351×502 piece containing the dog — nowhere near enough to
+fill a full-width hero. `hero-dog.jpg` is therefore built by `make_hero.py`:
+the sharp dog sits right of centre over a heavily blurred, darkened blow-up of
+the same frame, feathered so there is no seam. The blur reads as depth of field.
+`hero-dog-mobile.jpg` is a taller, tighter crop used below 1040px.
+
+Replace the whole thing with one real wide photograph when you have it — that is
+a single line in the CSS (`.hero.has-photo`), no compositing needed.
+
+**Everything here is low resolution.** The mockup is 1024×1536, so the card crops
+range from 312×168 to 462×242 and are displayed at or above native size. They
+look soft on a high-DPI screen. Fine for judging the design; not fine for launch.
+Replace with the original full-resolution files, or with real photographs of
+Scott's own dogs, at roughly 2× the displayed size.
+
+The PSWC seal is the exception — it is served at its native 1226px and is sharp.
 
 Slots with no matching source image still show a labelled placeholder plate:
 
 - Vesi's progress log — three dated shots (week 9, month 4, month 6)
 - Working Dogs — environmental work at height / on grating, dog on an unstable surface
-- About — the Highland Canine and IACP logo slots
+
+## Credential logos
+
+The Highland Canine Training and IACP marks are on the About page, sitting on a
+light plate so they appear in their own colours, unmodified. Both were taken
+from iacpdogs.org.
+
+They belong to their respective organisations. Before this goes live, check each
+body's logo usage terms — IACP in particular sets out how members may display
+the mark, and neither affiliation is active until December.
 
 ## Still to confirm
 
@@ -91,6 +113,7 @@ and usage has been checked.
 - [ ] Remove the `noindex` meta block from all 11 pages
 - [ ] Full-resolution photography in place of the low-res mockup crops
 - [ ] Real contact details and social links
+- [ ] Confirm Highland / IACP logo usage terms
 - [ ] Connect the contact form + add a privacy notice
 - [ ] Add Open Graph / Twitter card tags and a real share image
 - [ ] Point `pswk9.com` at it, add a root `robots.txt` and a sitemap
